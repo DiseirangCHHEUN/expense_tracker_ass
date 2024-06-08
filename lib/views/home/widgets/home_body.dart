@@ -13,7 +13,7 @@ GetBuilder<HomeController> buildHomeBody() {
       return PageView.builder(
         itemCount: controller.pageItem.length,
         itemBuilder: (context, index) {
-          return ListView(
+          return Column(
             children: [
               buildHomeHeader(index: index),
               ListView.builder(
@@ -24,7 +24,7 @@ GetBuilder<HomeController> buildHomeBody() {
                   bottom: 70,
                 ),
                 shrinkWrap: true,
-                itemCount: controller.pageItem.length,
+                itemCount: 2,
                 itemBuilder: (context, index) {
                   return SectionHeader(
                     controller: controller,
@@ -52,7 +52,9 @@ class SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,43 +84,41 @@ class SectionHeader extends StatelessWidget {
             ),
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.all(AppSizes.p5),
-          child: ListView.builder(
-              padding: const EdgeInsets.symmetric(vertical: AppSizes.p5),
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: const EdgeInsets.symmetric(vertical: AppSizes.p5),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSizes.p16,
-                    vertical: AppSizes.p8,
+        ListView.builder(
+          padding: const EdgeInsets.symmetric(
+              vertical: AppSizes.p5, horizontal: AppSizes.p5),
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: 3,
+          itemBuilder: (context, index) {
+            return Container(
+              margin: const EdgeInsets.symmetric(vertical: AppSizes.p5),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSizes.p16,
+                vertical: AppSizes.p8,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(AppSizes.m5),
+                color: ColorConstants.kGreyColor.withOpacity(.4),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Row(
+                      children: [
+                        const Icon(Icons.abc),
+                        Text('${controller.pageItem[controller.currentIndex]}')
+                      ],
+                    ),
                   ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(AppSizes.m5),
-                    color: ColorConstants.kGreyColor.withOpacity(.4),
+                  Text(
+                    '${controller.pageItem[index]} USD',
+                    style: TextStyleConstant.kTitleSmallTextStyle,
                   ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Row(
-                          children: [
-                            const Icon(Icons.abc),
-                            Text(
-                                '${controller.pageItem[controller.currentIndex]}')
-                          ],
-                        ),
-                      ),
-                      Text(
-                        '${controller.pageItem[index]} USD',
-                        style: TextStyleConstant.kTitleSmallTextStyle,
-                      ),
-                    ],
-                  ),
-                );
-              }),
+                ],
+              ),
+            );
+          },
         ),
       ],
     );
