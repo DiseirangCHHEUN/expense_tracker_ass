@@ -1,7 +1,6 @@
-import 'package:expense_tracker/constants/style_constant.dart';
 import 'package:expense_tracker/translation/app_translation.dart';
 import 'package:expense_tracker/views/dashboard/binding/dashboard_binding.dart';
-import 'package:expense_tracker/views/dashboard/dashboard_view.dart';
+import 'package:expense_tracker/views/login/login_view.dart';
 import 'package:expense_tracker/views/setting/controller/setting_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,14 +18,14 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Expense Tracker-ASS',
-          themeMode: ThemeMode.dark,
-          darkTheme: darkThemeData,
+          themeMode: ThemeMode.light,
+          darkTheme: ThemeData.light(),
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
           initialBinding: DashboardBinding(),
-          home: DashboardView(),
+          home: LoginView(),
           translations: AppTranslation(),
           locale: _settingController.isEnglish
               ? const Locale('km', 'KH')
