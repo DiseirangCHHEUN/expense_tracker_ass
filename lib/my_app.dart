@@ -18,11 +18,10 @@ class MyApp extends StatelessWidget {
       builder: (context) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Expense Tracker',
+          title: 'Expense Tracker-ASS',
           themeMode: ThemeMode.dark,
           darkTheme: darkThemeData,
           theme: ThemeData(
-            scaffoldBackgroundColor: Colors.grey[900],
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
