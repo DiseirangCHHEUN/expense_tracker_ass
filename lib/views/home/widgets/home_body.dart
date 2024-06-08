@@ -16,21 +16,23 @@ GetBuilder<HomeController> buildHomeBody() {
           return Column(
             children: [
               buildHomeHeader(index: index),
-              ListView.builder(
-                padding: const EdgeInsets.only(
-                  top: AppSizes.p10,
-                  right: AppSizes.p16,
-                  left: AppSizes.p16,
-                  bottom: 70,
+              Expanded(
+                child: ListView.builder(
+                  padding: const EdgeInsets.only(
+                    top: AppSizes.p10,
+                    right: AppSizes.p16,
+                    left: AppSizes.p16,
+                    bottom: 70,
+                  ),
+                  shrinkWrap: true,
+                  itemCount: controller.pageItem.length,
+                  itemBuilder: (context, index) {
+                    return SectionHeader(
+                      controller: controller,
+                      index: index,
+                    );
+                  },
                 ),
-                shrinkWrap: true,
-                itemCount: 2,
-                itemBuilder: (context, index) {
-                  return SectionHeader(
-                    controller: controller,
-                    index: index,
-                  );
-                },
               ),
             ],
           );
@@ -52,9 +54,7 @@ class SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
+    return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
