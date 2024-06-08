@@ -1,9 +1,7 @@
 import 'package:expense_tracker/constants/style_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'widgets/home_body.dart';
-import 'widgets/home_header.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
