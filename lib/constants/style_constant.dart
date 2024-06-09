@@ -6,8 +6,7 @@ import 'color_constant.dart';
 class TextStyleConstant {
   static const TextStyle kTitleTextStyle = TextStyle(
     fontWeight: FontWeight.bold,
-    fontSize: AppSizes.s22,
-    color: ColorConstants.kWhiteColor,
+    fontSize: AppSizes.s24,
   );
   static const TextStyle kTitleSmallTextStyle = TextStyle(
     fontWeight: FontWeight.bold,
