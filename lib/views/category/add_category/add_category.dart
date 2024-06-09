@@ -2,40 +2,28 @@ import 'package:expense_tracker/constants/app_size.dart';
 import 'package:expense_tracker/constants/color_constant.dart';
 import 'package:expense_tracker/utils/custom_appbar.dart';
 import 'package:expense_tracker/utils/custom_textfield.dart';
+import 'package:expense_tracker/views/category/add_category/controller/add_category_controller.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 // import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 
-class AddCategoryView extends StatefulWidget {
-  const AddCategoryView({super.key});
+import 'data/constant_list.dart';
 
-  @override
-  State<AddCategoryView> createState() => _AddCategoryViewState();
-}
-
-class _AddCategoryViewState extends State<AddCategoryView> {
+class AddCategoryView extends GetView<AddCategoryController> {
+  AddCategoryView({super.key});
   final TextEditingController categoryNameController = TextEditingController();
 
   final TextEditingController categoryKhNameController =
       TextEditingController();
-
-  // late IconData _icon;
-
-  // _pickIcon() async {
-  //   // IconData icon = await FlutterIconPicker.showIconPicker(context,
-  //   //   iconPackMode: IconPack.cupertino);
-
-  //   // _icon = icon;
-  //   setState(() {});
-  //   debugPrint('Picked Icon:  $_icon');
-  // }
+  final AddCategoryController _addCateController =
+      Get.put(AddCategoryController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(
-        title: 'Adds Category',
+        title: 'add cate',
         leading: const BackButton(),
         actions: IconButton(
           onPressed: () {
@@ -87,78 +75,47 @@ class _AddCategoryViewState extends State<AddCategoryView> {
           child: Wrap(
             children: [
               for (int i = 0; i <= cateType.length - 1; i++)
-                GestureDetector(
-                  onTap: () {
-                    debugPrint(cateType[i]['name']);
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.only(
-                      right: AppSizes.m10,
-                      bottom: AppSizes.m10,
-                    ),
-                    padding: const EdgeInsets.all(AppSizes.p10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(AppSizes.m5),
-                        color: ColorConstants.kGreyColor.withOpacity(.9)),
-                    child: Wrap(
-                      children: [
-                        Text(
-                          cateType[i]['name'],
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: AppSizes.s12,
-                          ),
+                GetBuilder<AddCategoryController>(
+                  builder: (context) {
+                    return GestureDetector(
+                      onTap: () => _addCateController.setSelectedCateType(i: i),
+                      child: Container(
+                        margin: const EdgeInsets.only(
+                          right: AppSizes.m10,
+                          bottom: AppSizes.m10,
                         ),
-                        const SizedBox(width: AppSizes.p10),
-                        Icon(
-                          cateType[i]['icon'],
-                          color: Colors.black,
-                          size: 17,
-                        )
-                      ],
-                    ),
-                  ),
+                        padding: const EdgeInsets.all(AppSizes.p10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(AppSizes.m5),
+                          color: _addCateController.currentCateTypeIndex == i &&
+                                  _addCateController.isCateTypeSelected
+                              ? ColorConstants.kYellowColor
+                              : ColorConstants.kGreyColor.withOpacity(.9),
+                        ),
+                        child: Wrap(
+                          children: [
+                            Text(
+                              cateType[i]['name'],
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: AppSizes.s12,
+                              ),
+                            ),
+                            const SizedBox(width: AppSizes.p10),
+                            Icon(
+                              cateType[i]['icon'],
+                              color: Colors.black,
+                              size: 17,
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
             ],
           ),
         ),
-        // FormBuilderChoiceChip<String>(
-        //   padding: const EdgeInsets.symmetric(horizontal: AppSizes.p8),
-        //   name: 'choice_chip',
-        //   decoration: const InputDecoration(
-        //     labelText: 'Category Type',
-        //     labelStyle: TextStyle(
-        //       fontWeight: FontWeight.bold,
-        //       fontSize: AppSizes.s18,
-        //     ),
-        //   ),
-        //   options: [
-        //     for (int i = 0; i <= cateType.length - 1; i++)
-        //       FormBuilderChipOption(
-        //         value: cateType[i]['name'],
-        //         child: Wrap(
-        //           children: [
-        //             Text(
-        //               cateType[i]['name'],
-        //               style: const TextStyle(
-        //                 fontWeight: FontWeight.bold,
-        //                 fontSize: AppSizes.s12,
-        //               ),
-        //             ),
-        //             const SizedBox(width: AppSizes.p10),
-        //             Icon(
-        //               cateType[i]['icon'],
-        //               color: Colors.black,
-        //               size: 17,
-        //             )
-        //           ],
-        //         ),
-        //       ),
-        //   ],
-        //   onChanged: (value) {
-        //     print('Selected: $value');
-        //   },
-        // ),
         const SizedBox(height: AppSizes.p16),
         const Text(
           'Icon',
@@ -176,7 +133,7 @@ class _AddCategoryViewState extends State<AddCategoryView> {
               border: Border.all(
                 style: BorderStyle.solid,
                 width: .5,
-                color: ColorConstants.kWhiteColor,
+                // color: ColorConstants.kWhiteColor,
               ),
               borderRadius: BorderRadius.circular(AppSizes.m8),
             ),
@@ -197,8 +154,23 @@ class _AddCategoryViewState extends State<AddCategoryView> {
             itemBuilder: (context, index) => Padding(
               padding: EdgeInsets.only(
                   right: index == colorList.length - 1 ? 0 : AppSizes.p16),
-              child: CircleAvatar(
-                backgroundColor: colorList[index],
+              child: GetBuilder<AddCategoryController>(
+                builder: (context) {
+                  return GestureDetector(
+                    onTap: () => _addCateController.setSelectedColor(i: index),
+                    child: CircleAvatar(
+                      maxRadius: 18,
+                      backgroundColor: colorList[index]['color'],
+                      child: _addCateController.currentColorIndex == index &&
+                              _addCateController.isColorSelected
+                          ? const Icon(
+                              Icons.check_rounded,
+                              color: ColorConstants.kWhiteColor,
+                            )
+                          : null,
+                    ),
+                  );
+                },
               ),
             ),
           ),
@@ -206,44 +178,4 @@ class _AddCategoryViewState extends State<AddCategoryView> {
       ],
     );
   }
-
-  final colorList = [
-    Colors.pink[400],
-    Colors.green[600],
-    Colors.cyan[400],
-    Colors.cyan[900],
-    Colors.cyan[600],
-    Colors.cyan[800],
-  ];
-
-  final List cateType = [
-    {
-      'name': 'Income',
-      'icon': Icons.incomplete_circle_rounded,
-    },
-    {
-      'name': 'Expense',
-      'icon': Icons.open_in_browser_rounded,
-    },
-    {
-      'name': 'Saving',
-      'icon': Icons.savings_rounded,
-    },
-    {
-      'name': 'Dept',
-      'icon': Icons.departure_board_rounded,
-    },
-    {
-      'name': 'Loan',
-      'icon': Icons.currency_bitcoin_rounded,
-    },
-    {
-      'name': 'Investment',
-      'icon': Icons.bar_chart_rounded,
-    },
-    {
-      'name': 'Others',
-      'icon': Icons.more_rounded,
-    },
-  ];
 }

@@ -1,11 +1,11 @@
 import 'package:expense_tracker/constants/style_constant.dart';
 import 'package:expense_tracker/views/auth/login/login_view.dart';
+import 'package:expense_tracker/views/dashboard/dashboard_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../constants/app_size.dart';
 import '../../../constants/color_constant.dart';
 import '../../../utils/custom_button.dart';
-import '../../category/category_view.dart';
 import '../controller/auth_controller.dart';
 import 'widgets/signup_textfield.dart';
 
@@ -100,11 +100,14 @@ class SignupView extends StatelessWidget {
                 suffixIcon: const SizedBox(),
               ),
               CustomButton(
-                onPress: () => Get.to(
-                  () => const CategoryView(),
-                  transition: Transition.cupertino,
-                  duration: const Duration(milliseconds: 300),
-                ),
+                onPress: () {
+                  _authController.clearSignupData();
+                  Get.to(
+                    () => DashboardView(),
+                    transition: Transition.zoom,
+                    duration: const Duration(milliseconds: 300),
+                  );
+                },
                 buttonText: 'Register',
                 icon: Icons.login_rounded,
               ),

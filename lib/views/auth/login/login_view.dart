@@ -1,9 +1,9 @@
 import 'package:expense_tracker/constants/app_size.dart';
 import 'package:expense_tracker/constants/color_constant.dart';
 import 'package:expense_tracker/views/auth/signup/signup_view.dart';
-import 'package:expense_tracker/views/category/category_view.dart';
 import 'package:expense_tracker/views/auth/controller/auth_controller.dart';
 import 'package:expense_tracker/utils/custom_button.dart';
+import 'package:expense_tracker/views/dashboard/dashboard_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'widgets/login_textfield.dart';
@@ -77,11 +77,14 @@ class LoginView extends GetView<AuthController> {
                 ],
               ),
               CustomButton(
-                onPress: () => Get.to(
-                  () => const CategoryView(),
-                  transition: Transition.cupertino,
-                  duration: const Duration(milliseconds: 300),
-                ),
+                onPress: () {
+                  _authController.clearLoginData();
+                  Get.to(
+                    () => DashboardView(),
+                    transition: Transition.zoom,
+                    duration: const Duration(milliseconds: 300),
+                  );
+                },
                 buttonText: 'Login',
                 icon: Icons.login_rounded,
               ),

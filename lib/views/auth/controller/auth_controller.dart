@@ -37,4 +37,17 @@ class AuthController extends GetxController {
       update();
     }
   }
+
+  void clearLoginData() {
+    emailLoginController.clear();
+    pwdLoginController.clear();
+  }
+
+  void clearSignupData() {
+    usernameSignupController.clear();
+    emailSignupController.clear();
+    phoneSignupController.clear();
+    pwdSignupController.clear();
+    cPwdSignupController.clear();
+  }
 }

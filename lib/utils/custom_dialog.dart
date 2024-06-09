@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import '../constants/app_size.dart';
 import '../constants/color_constant.dart';
-import '../constants/style_constant.dart';
 
 class CustomDialog extends StatelessWidget {
   const CustomDialog({super.key, required this.children, required this.title});
@@ -22,14 +21,14 @@ class CustomDialog extends StatelessWidget {
         padding: const EdgeInsets.all(AppSizes.p16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: ColorConstants.kBackgroundColor,
+          // color: ColorConstants.kBackgroundColor,
         ),
         child: Wrap(
           children: [
             Center(
               child: Text(
                 title.tr,
-                style: TextStyleConstant.kTitleSmallTextStyle,
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
             const Divider(thickness: .5),

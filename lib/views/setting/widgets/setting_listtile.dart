@@ -1,10 +1,48 @@
-import 'package:expense_tracker/constants/color_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../constants/style_constant.dart';
+
+import '../../../constants/color_constant.dart';
 
 class SettingListTile extends StatelessWidget {
   const SettingListTile({
+    super.key,
+    required this.title,
+    required this.trailing,
+    required this.onTap,
+    required this.leading,
+    required this.subtitle,
+  });
+  final Widget leading, trailing;
+  final String title, subtitle;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        child: ListTile(
+          leading: leading,
+          title: Text(
+            title.tr,
+            textAlign: TextAlign.left,
+            // style: TextStyleConstant.kTitleSmallTextStyle,
+          ),
+          subtitle: Text(
+            subtitle.tr,
+            style: TextStyle(
+              color: title == 'profile' ? null : ColorConstants.kYellowColor,
+            ),
+          ),
+          trailing: trailing,
+        ),
+      ),
+    );
+  }
+}
+
+class LanguageListTile extends StatelessWidget {
+  const LanguageListTile({
     super.key,
     required this.title,
     required this.trailing,
@@ -19,15 +57,17 @@ class SettingListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: ListTile(
-        iconColor: ColorConstants.kWhiteColor,
-        leading: leading,
-        title: Text(
-          title.tr,
-          textAlign: TextAlign.left,
-          style: TextStyleConstant.kTitleSmallTextStyle,
+      child: Card(
+        child: ListTile(
+          // iconColor: ColorConstants.kWhiteColor,
+          leading: leading,
+          title: Text(
+            title.tr,
+            textAlign: TextAlign.left,
+            // style: TextStyleConstant.kTitleSmallTextStyle,
+          ),
+          trailing: trailing,
         ),
-        trailing: trailing,
       ),
     );
   }

@@ -7,6 +7,7 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox('english');
   await Hive.openBox('notification');
+  await Hive.openBox('thememode');
 
   runApp(MyApp());
 }
