@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../constants/app_size.dart';
-import '../../../../constants/color_constant.dart'; 
+import '../../../../constants/color_constant.dart';
 
 TextField buildLoginTextField({
   required bool obscure,
@@ -16,9 +16,8 @@ TextField buildLoginTextField({
       decoration: InputDecoration(
         hintText: hint,
         suffixIcon: suffixIcon,
-        suffixIconColor: ColorConstants.kRedColor.withOpacity(.5),
+        suffixIconColor: ColorConstants.kRedColor,
         prefixIcon: prefixIcon,
-        prefixIconColor: Colors.black,
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             strokeAlign: AppSizes.p10,

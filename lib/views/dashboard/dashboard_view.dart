@@ -26,7 +26,8 @@ class DashboardView extends GetView<DashboardController> {
       ),
       bottomNavigationBar: CurvedNavigationBar(
         animationDuration: const Duration(milliseconds: 500),
-        buttonLabelColor: ColorConstants.kWhiteColor,
+        // buttonLabelColor: ColorConstants.kWhiteColor,
+
         onTap: (value) {
           dashboardController.changeIndex(value);
         },
@@ -35,11 +36,12 @@ class DashboardView extends GetView<DashboardController> {
         items: [
           CurvedNavigationBarItem(
             icon: const Icon(Icons.home_rounded),
+          
             label: 'home'.tr,
           ),
           CurvedNavigationBarItem(
             icon: const Icon(Icons.bar_chart_rounded),
-            label: 'report'.tr,
+            label: 'states'.tr,
           ),
           CurvedNavigationBarItem(
             icon: const Icon(Icons.settings_rounded),

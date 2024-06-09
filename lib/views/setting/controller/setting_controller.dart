@@ -11,9 +11,10 @@ class SettingController extends GetxController {
     super.onInit();
   }
 
-  bool isNotificationOn = false;
   late Locale local;
+  bool isNotificationOn = false;
   bool isEnglish = false;
+  bool isDarkMode = false;
   toggleLanguage() async {
     if (Get.locale == const Locale('km', 'KH')) {
       local = const Locale('en', 'US');
@@ -64,8 +65,24 @@ class SettingController extends GetxController {
     return;
   }
 
+  void toDark() {
+    isDarkMode = true;
+    update();
+    updateThemeMode();
+    Get.back();
+  }
+
+  void tolight() {
+    isDarkMode = false;
+    update();
+    updateThemeMode();
+    Get.back();
+  }
+
   final isEnglishBox = Hive.box('english');
   final isNotificationBox = Hive.box('notification');
+  final isDarkThemeBox = Hive.box('thememode');
+
   void loadSettingsData() async {
     if (isEnglishBox.get('ENGLISH') != null) {
       isEnglish = await isEnglishBox.get('ENGLISH');
@@ -75,7 +92,11 @@ class SettingController extends GetxController {
 
     if (isNotificationBox.get('NOTIFICATION') != null) {
       isNotificationOn = await isNotificationBox.get('NOTIFICATION');
-      print(isNotificationOn);
+      update();
+    }
+    if (isDarkThemeBox.get('THEMEMODE') != null) {
+      isDarkMode = await isDarkThemeBox.get('THEMEMODE');
+      print(isDarkMode);
       update();
     }
   }
@@ -86,6 +107,10 @@ class SettingController extends GetxController {
 
   void updateNotification() {
     isNotificationBox.put('NOTIFICATION', isNotificationOn);
+  }
+
+  void updateThemeMode() {
+    isDarkThemeBox.put('THEMEMODE', isDarkMode);
   }
 
   void toggleNotification() {

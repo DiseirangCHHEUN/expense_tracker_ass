@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../constants/app_size.dart';
 import '../constants/color_constant.dart';
 
@@ -18,8 +19,8 @@ Column buildTextField({
           decoration: InputDecoration(
             filled: true,
             fillColor: ColorConstants.kGreyColor.withOpacity(.5),
-            label: Text(hint),
-            hintText: hint,
+            label: Text(hint.tr),
+            hintText: hint.tr,
             suffixIcon: suffixIcon,
             suffixIconColor: ColorConstants.kYellowColor,
             prefixIconColor: Colors.black,
