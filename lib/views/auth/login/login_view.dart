@@ -45,25 +45,29 @@ class LoginView extends GetView<AuthController> {
               buildLoginTextField(
                   hint: 'Enter email address',
                   obscure: false,
-                  controller: _authController.emailController,
+                  controller: _authController.emailLoginController,
                   keyboardType: TextInputType.emailAddress,
                   prefixIcon: const Icon(Icons.email_rounded),
                   suffixIcon: const SizedBox()),
               const SizedBox(height: AppSizes.p10),
-              Obx(
-                () => buildLoginTextField(
-                  hint: 'Enter password',
-                  obscure: _authController.isPwdVisibility.value,
-                  controller: _authController.pwdController,
-                  keyboardType: TextInputType.visiblePassword,
-                  prefixIcon: const Icon(Icons.lock),
-                  suffixIcon: GestureDetector(
-                    onTap: _authController.toggleShowPwd,
-                    child: Icon(_authController.isPwdVisibility.value
-                        ? Icons.visibility_rounded
-                        : Icons.visibility_off_rounded),
-                  ),
-                ),
+              GetBuilder<AuthController>(
+                builder: (context) {
+                  return buildLoginTextField(
+                    hint: 'Enter password',
+                    obscure: _authController.isPwdVisibility,
+                    controller: _authController.pwdLoginController,
+                    keyboardType: TextInputType.visiblePassword,
+                    prefixIcon: const Icon(Icons.lock),
+                    suffixIcon: GestureDetector(
+                      onTap: _authController.toggleShowPwd,
+                      child: Icon(
+                        _authController.isPwdVisibility
+                            ? Icons.visibility_off_rounded
+                            : Icons.visibility_rounded,
+                      ),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: AppSizes.p10),
               const Row(

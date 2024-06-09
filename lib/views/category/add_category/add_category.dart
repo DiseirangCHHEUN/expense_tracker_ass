@@ -20,16 +20,16 @@ class _AddCategoryViewState extends State<AddCategoryView> {
   final TextEditingController categoryKhNameController =
       TextEditingController();
 
-  late IconData _icon;
+  // late IconData _icon;
 
-  _pickIcon() async {
-    // IconData icon = await FlutterIconPicker.showIconPicker(context,
-    //   iconPackMode: IconPack.cupertino);
+  // _pickIcon() async {
+  //   // IconData icon = await FlutterIconPicker.showIconPicker(context,
+  //   //   iconPackMode: IconPack.cupertino);
 
-    // _icon = icon;
-    setState(() {});
-    debugPrint('Picked Icon:  $_icon');
-  }
+  //   // _icon = icon;
+  //   setState(() {});
+  //   debugPrint('Picked Icon:  $_icon');
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +89,7 @@ class _AddCategoryViewState extends State<AddCategoryView> {
               for (int i = 0; i <= cateType.length - 1; i++)
                 GestureDetector(
                   onTap: () {
-                    print(cateType[i]['name']);
+                    debugPrint(cateType[i]['name']);
                   },
                   child: Container(
                     margin: const EdgeInsets.only(

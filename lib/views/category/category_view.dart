@@ -18,7 +18,7 @@ class CategoryView extends GetView<CategoryController> {
           icon: const Icon(Icons.add),
           onPressed: () {
             Get.to(
-              () => AddCategoryView(),
+              () => const AddCategoryView(),
               transition: Transition.rightToLeft,
               duration: const Duration(milliseconds: 300),
             );
