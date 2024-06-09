@@ -1,6 +1,6 @@
 import 'package:expense_tracker/translation/app_translation.dart';
 import 'package:expense_tracker/views/dashboard/binding/dashboard_binding.dart';
-import 'package:expense_tracker/views/login/login_view.dart';
+import 'package:expense_tracker/views/auth/login/login_view.dart';
 import 'package:expense_tracker/views/setting/controller/setting_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

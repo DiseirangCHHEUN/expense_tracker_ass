@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ColorConstants {
-  static const Color kYellowColor = Color(0xFFFDBF09);
-  static const Color kRedColor = Color(0xFFFC2600);
+  static const Color kYellowColor = Color(0xFFFFBF00);
+  static const Color kRedColor = Color(0xFFCC1F00);
   static const Color kGreenColor = Color(0xFF4CAF50);
   static const Color kBlueColor = Color(0xFF2896E1);
   static const Color kWhiteColor = Color(0xFFFFFFFF);
