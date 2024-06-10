@@ -24,7 +24,7 @@ class SettingView extends GetView<SettingController> {
           actions: const SizedBox()),
       body: ListView(
         padding: const EdgeInsets.symmetric(
-            horizontal: AppSizes.p8, vertical: AppSizes.p16),
+            horizontal: AppSizes.p8, vertical: AppSizes.p18),
         shrinkWrap: true,
         children: [
           SettingListTile(
@@ -85,22 +85,22 @@ class SettingView extends GetView<SettingController> {
             ),
             subtitle: settingController.isEnglish ? 'khmer' : 'english',
           ),
-          SettingListTile(
-            title: 'theme',
-            trailing: const Icon(Icons.arrow_forward_ios_rounded),
-            onTap: () => Get.dialog(
-              buildChangeModeDialog(),
-            ),
-            leading: GetBuilder<SettingController>(builder: (context) {
-              return Icon(
+          GetBuilder<SettingController>(builder: (context) {
+            return SettingListTile(
+              title: 'theme',
+              trailing: const Icon(Icons.arrow_forward_ios_rounded),
+              onTap: () => Get.dialog(
+                buildChangeModeDialog(),
+              ),
+              leading: Icon(
                 settingController.isDarkMode
                     ? Icons.nights_stay
                     : Icons.light_mode_rounded,
                 color: ColorConstants.kYellowColor,
-              );
-            }),
-            subtitle: settingController.isDarkMode ? 'dark' : 'light',
-          ),
+              ),
+              subtitle: settingController.isDarkMode ? 'dark' : 'light',
+            );
+          }),
           SettingListTile(
             title: 'notification',
             trailing: buildNotificationSwitchButton(),
@@ -114,11 +114,9 @@ class SettingView extends GetView<SettingController> {
           SettingListTile(
             title: 'export data',
             trailing: const Icon(Icons.arrow_forward_ios_rounded),
-            onTap: () => Get.dialog(
-              buildChangeModeDialog(),
-            ),
+            onTap: () {},
             leading: const Icon(
-              Icons.nights_stay,
+              Icons.download_rounded,
               color: ColorConstants.kYellowColor,
             ),
             subtitle: 'export data to excel',

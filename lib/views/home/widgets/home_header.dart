@@ -19,7 +19,7 @@ GetBuilder<HomeController> buildHomeHeader({required int index}) {
               onPressed: () => controller.goPreviouse(),
               color: controller.currentIndex == 0
                   ? ColorConstants.kGreyColor
-                  : ColorConstants.kWhiteColor,
+                  : null,
             ),
             Container(
               padding: const EdgeInsets.symmetric(
@@ -46,7 +46,7 @@ GetBuilder<HomeController> buildHomeHeader({required int index}) {
                 Icons.arrow_forward_rounded,
                 color: controller.currentIndex == controller.pageItem.length - 1
                     ? ColorConstants.kGreyColor
-                    : ColorConstants.kWhiteColor,
+                    : null,
               ),
             ),
           ],

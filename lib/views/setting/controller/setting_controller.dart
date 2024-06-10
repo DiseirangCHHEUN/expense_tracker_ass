@@ -79,38 +79,36 @@ class SettingController extends GetxController {
     Get.back();
   }
 
-  final isEnglishBox = Hive.box('english');
-  final isNotificationBox = Hive.box('notification');
-  final isDarkThemeBox = Hive.box('thememode');
+  final settingBox = Hive.box('settings');
 
   void loadSettingsData() async {
-    if (isEnglishBox.get('ENGLISH') != null) {
-      isEnglish = await isEnglishBox.get('ENGLISH');
+    if (settingBox.get('ENGLISH') != null) {
+      isEnglish = await settingBox.get('ENGLISH');
       changeLanguage();
       update();
     }
 
-    if (isNotificationBox.get('NOTIFICATION') != null) {
-      isNotificationOn = await isNotificationBox.get('NOTIFICATION');
+    if (settingBox.get('NOTIFICATION') != null) {
+      isNotificationOn = await settingBox.get('NOTIFICATION');
       update();
     }
-    if (isDarkThemeBox.get('THEMEMODE') != null) {
-      isDarkMode = await isDarkThemeBox.get('THEMEMODE');
+    if (settingBox.get('THEMEMODE') != null) {
+      isDarkMode = await settingBox.get('THEMEMODE');
       print(isDarkMode);
       update();
     }
   }
 
   void updateEnglishLang() {
-    isEnglishBox.put('ENGLISH', isEnglish);
+    settingBox.put('ENGLISH', isEnglish);
   }
 
   void updateNotification() {
-    isNotificationBox.put('NOTIFICATION', isNotificationOn);
+    settingBox.put('NOTIFICATION', isNotificationOn);
   }
 
   void updateThemeMode() {
-    isDarkThemeBox.put('THEMEMODE', isDarkMode);
+    settingBox.put('THEMEMODE', isDarkMode);
   }
 
   void toggleNotification() {

@@ -5,6 +5,7 @@ import '../constants/color_constant.dart';
 AppBar buildAppBar(
     {required String title, required Widget leading, required Widget actions}) {
   return AppBar(
+    elevation: 0,
     centerTitle: true,
     title: Text(
       title.tr,
