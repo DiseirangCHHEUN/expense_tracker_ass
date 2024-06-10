@@ -63,8 +63,10 @@ class AppTranslation extends Translations {
           'income': 'Income',
           'export data': 'Export data',
           'export data to excel': 'Export data to Excel',
+          'pick an icon': 'Pick an icon',
         },
         'km_KH': {
+          'pick an icon': 'ជ្រើសរូបដំណាង',
           'export data to excel': 'ចម្លងទិន្នន័យចេញជា Excel',
           'export data': 'ចម្លងទិន្នន័យចេញ',
           'income': 'ចំណូល',

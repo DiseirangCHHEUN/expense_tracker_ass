@@ -10,9 +10,13 @@ class TextStyleConstant {
   );
   static const TextStyle kSmallTitleTextStyle = TextStyle(
     fontWeight: FontWeight.bold,
-    fontSize: AppSizes.s20,
+ 
   );
-
+  static const TextStyle kButtonTextStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    color: ColorConstants.kWhiteColor,
+ 
+  );
   static const TextStyle kSubTitleTextStyle = TextStyle(
     color: ColorConstants.kWhiteColor,
     fontSize: AppSizes.s14,
@@ -49,11 +53,11 @@ ThemeData darkThemeData = ThemeData.dark().copyWith(
           900: Color(0xFFE00E33),
         },
       ),
-      backgroundColor: ColorConstants.kBackgroundColor,
+      backgroundColor: ColorConstants.kBGColor,
     ),
-    scaffoldBackgroundColor: ColorConstants.kBackgroundColor,
+    scaffoldBackgroundColor: ColorConstants.kBGColor,
     appBarTheme: AppBarTheme(
-      backgroundColor: ColorConstants.kBackgroundColor,
+      backgroundColor: ColorConstants.kBGColor,
       elevation: 0,
       foregroundColor: ColorConstants.kWhiteColor,
     ),

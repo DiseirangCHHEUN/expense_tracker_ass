@@ -43,10 +43,11 @@ dependencies:
   icons_plus: ^5.0.0
   path: ^1.9.0
   sqflite: ^2.3.3+1 
-  flutter_form_builder: ^9.3.0
+  # flutter_form_builder: ^9.3.0
   flutter_iconpicker: ^3.4.5
   image_picker: ^1.1.2
   permission_handler: ^10.2.0
+  image_cropper: ^7.0.4
 
 dev_dependencies:
   flutter_test:

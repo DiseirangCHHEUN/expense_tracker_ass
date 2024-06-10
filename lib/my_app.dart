@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
           darkTheme: isDark ? ThemeData.dark() : ThemeData.light(),
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
             useMaterial3: true,
           ),
           initialBinding: DashboardBinding(),

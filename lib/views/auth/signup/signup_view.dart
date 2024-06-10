@@ -34,8 +34,7 @@ class SignupView extends StatelessWidget {
                       builder: (context) {
                         return CircleAvatar(
                           maxRadius: Get.width * .14,
-                          backgroundColor:
-                              ColorConstants.kRedColor.withOpacity(.8),
+                          backgroundColor: ColorConstants.kRedColor,
                           backgroundImage: _authController.imageFile == null
                               ? null
                               : FileImage(_authController.imageFile!),
@@ -54,10 +53,9 @@ class SignupView extends StatelessWidget {
                       right: 0,
                       child: GestureDetector(
                         onTap: _authController.pickGalleryImage,
-                        child: CircleAvatar(
-                          backgroundColor:
-                              ColorConstants.kRedColor.withOpacity(.8),
-                          child: const Icon(
+                        child: const CircleAvatar(
+                          backgroundColor: ColorConstants.kRedColor,
+                          child: Icon(
                             Icons.camera_alt_rounded,
                             color: ColorConstants.kWhiteColor,
                           ),

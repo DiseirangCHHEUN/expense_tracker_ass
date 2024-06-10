@@ -5,6 +5,7 @@ import 'package:expense_tracker/utils/custom_dialog.dart';
 import 'package:expense_tracker/views/dashboard/controller/dashboard_controller.dart';
 import 'package:expense_tracker/views/dashboard/data/dropdown_item.dart';
 import 'package:expense_tracker/views/home/controller/home_controller.dart';
+import 'package:expense_tracker/views/setting/controller/setting_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,29 +25,38 @@ class DashboardView extends GetView<DashboardController> {
           return dashboardController.page[dashboardController.bottomNavIndex];
         },
       ),
-      bottomNavigationBar: CurvedNavigationBar(
-        animationDuration: const Duration(milliseconds: 500),
-        // buttonLabelColor: ColorConstants.kWhiteColor,
-
-        onTap: (value) {
-          dashboardController.changeIndex(value);
+      bottomNavigationBar: GetBuilder<SettingController>(
+        builder: (controller) {
+          return CurvedNavigationBar(
+            onTap: (value) {
+              dashboardController.changeIndex(value);
+            },
+            animationDuration: const Duration(milliseconds: 500),
+            buttonLabelColor: controller.isDarkMode
+                ? ColorConstants.kWhiteColor
+                : Colors.black,
+            buttonBackgroundColor: controller.isDarkMode
+                ? Colors.grey.shade600
+                : ColorConstants.kWhiteColor,
+            backgroundColor: controller.isDarkMode
+                ? Colors.grey.shade600
+                : Colors.transparent,
+            items: [
+              CurvedNavigationBarItem(
+                icon: const Icon(Icons.home_rounded),
+                label: 'home'.tr,
+              ),
+              CurvedNavigationBarItem(
+                icon: const Icon(Icons.bar_chart_rounded),
+                label: 'states'.tr,
+              ),
+              CurvedNavigationBarItem(
+                icon: const Icon(Icons.settings_rounded),
+                label: 'setting'.tr,
+              ),
+            ],
+          );
         },
-        buttonBackgroundColor: Colors.grey.shade600,
-        backgroundColor: Colors.grey.shade600,
-        items: [
-          CurvedNavigationBarItem(
-            icon: const Icon(Icons.home_rounded),
-            label: 'home'.tr,
-          ),
-          CurvedNavigationBarItem(
-            icon: const Icon(Icons.bar_chart_rounded),
-            label: 'states'.tr,
-          ),
-          CurvedNavigationBarItem(
-            icon: const Icon(Icons.settings_rounded),
-            label: 'setting'.tr,
-          ),
-        ],
       ),
       floatingActionButton: GetBuilder<DashboardController>(
         builder: (context) {
@@ -77,7 +87,7 @@ class DashboardView extends GetView<DashboardController> {
                               requestFocusOnTap: true,
                               label: Text(
                                 'type'.tr,
-                                style: TextStyleConstant.kSmallTitleTextStyle,
+                                style: TextStyleConstant.kTitleSmallTextStyle,
                               ),
                               onSelected: (ExpensionType? type) {
                                 dashboardController.onSelectColor(type);
@@ -97,7 +107,7 @@ class DashboardView extends GetView<DashboardController> {
                               }).toList(),
                             ),
                             TextField(
-                              style: TextStyleConstant.kSmallTitleTextStyle,
+                              style: TextStyleConstant.kTitleSmallTextStyle,
                               keyboardType: TextInputType.number,
                               controller: controller.textController,
                               decoration: InputDecoration(
@@ -138,7 +148,7 @@ class DashboardView extends GetView<DashboardController> {
                                     child: Text(
                                       'add'.tr,
                                       style: TextStyleConstant
-                                          .kSmallTitleTextStyle,
+                                          .kTitleSmallTextStyle,
                                     ),
                                   ),
                                 ),
@@ -154,7 +164,7 @@ class DashboardView extends GetView<DashboardController> {
                                     child: Text(
                                       'close'.tr,
                                       style: TextStyleConstant
-                                          .kSmallTitleTextStyle,
+                                          .kTitleSmallTextStyle,
                                     ),
                                   ),
                                 ),

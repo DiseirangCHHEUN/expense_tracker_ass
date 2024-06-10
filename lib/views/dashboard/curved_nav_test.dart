@@ -1,5 +1,8 @@
 import 'package:curved_navigation_bar_with_label/nav_custom_painter.dart';
+import 'package:expense_tracker/constants/color_constant.dart';
+import 'package:expense_tracker/views/setting/controller/setting_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 typedef LetIndexPage = bool Function(int value);
 
@@ -62,19 +65,23 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
     _startingPos = widget.index / _length;
 
     _animationController = AnimationController(vsync: this, value: _pos);
-    _animationController.addListener(() {
-      setState(() {
-        _pos = _animationController.value;
-        final endingPos = _endingIndex / widget.items.length;
-        final middle = (endingPos + _startingPos) / 2;
-        if ((endingPos - _pos).abs() < (_startingPos - _pos).abs()) {
-          _icon = widget.items[_endingIndex].icon;
-          _label = widget.items[_endingIndex].label;
-        }
-        _buttonHide =
-            (1 - ((middle - _pos) / (_startingPos - middle)).abs()).abs();
-      });
-    });
+    _animationController.addListener(
+      () {
+        setState(
+          () {
+            _pos = _animationController.value;
+            final endingPos = _endingIndex / widget.items.length;
+            final middle = (endingPos + _startingPos) / 2;
+            if ((endingPos - _pos).abs() < (_startingPos - _pos).abs()) {
+              _icon = widget.items[_endingIndex].icon;
+              _label = widget.items[_endingIndex].label;
+            }
+            _buttonHide =
+                (1 - ((middle - _pos) / (_startingPos - middle)).abs()).abs();
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -140,17 +147,25 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
                 ),
               ),
             ),
-            CustomPaint(
-              painter: NavCustomPainter(
-                startingLoc: _pos,
-                itemsLength: _length,
-                color: Theme.of(context).scaffoldBackgroundColor,
-                textDirection: Directionality.of(context),
-              ),
-              child: Container(
-                height: widget.height,
-              ),
-            ),
+            GetBuilder<SettingController>(builder: (controller) {
+              return CustomPaint(
+                painter: NavCustomPainter(
+                  startingLoc: _pos,
+                  itemsLength: _length,
+                  // color: ColorConstants.kBGColor,
+                  color: controller.isDarkMode
+                      ? Theme.of(context).scaffoldBackgroundColor
+                      : ColorConstants.kBGColor,
+
+                  // color: Theme.of(context).scaffoldBackgroundColor,
+                  textDirection: TextDirection.ltr,
+                  // textDirection: Directionality.of(context),
+                ),
+                child: Container(
+                  height: widget.height,
+                ),
+              );
+            }),
             Positioned(
               left: Directionality.of(context) == TextDirection.rtl
                   ? null
@@ -201,9 +216,6 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
                                 child: Text(
                                   item.label,
                                   maxLines: 1,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                  ),
                                 ),
                               ),
                             ),
@@ -236,13 +248,15 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
       }
 
       final newPosition = index / _length;
-      setState(() {
-        _startingPos = _pos;
-        _endingIndex = index;
-        _currentIndex = index;
-        _animationController.animateTo(newPosition,
-            duration: widget.animationDuration, curve: widget.animationCurve);
-      });
+      setState(
+        () {
+          _startingPos = _pos;
+          _endingIndex = index;
+          _currentIndex = index;
+          _animationController.animateTo(newPosition,
+              duration: widget.animationDuration, curve: widget.animationCurve);
+        },
+      );
     }
   }
 }

@@ -5,9 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  await Hive.openBox('english');
-  await Hive.openBox('notification');
-  await Hive.openBox('thememode');
+  await Hive.openBox('settings');
 
   runApp(MyApp());
 }
