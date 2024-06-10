@@ -47,6 +47,7 @@ dependencies:
   flutter_iconpicker: ^3.4.5
   image_picker: ^1.1.2
   permission_handler: ^10.2.0
+  image_cropper: ^7.0.4
 
 dev_dependencies:
   flutter_test:

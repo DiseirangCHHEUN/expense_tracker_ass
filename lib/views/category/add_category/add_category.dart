@@ -1,6 +1,7 @@
 import 'package:expense_tracker/constants/app_size.dart';
 import 'package:expense_tracker/constants/color_constant.dart';
 import 'package:expense_tracker/utils/custom_appbar.dart';
+import 'package:expense_tracker/utils/custom_dialog.dart';
 import 'package:expense_tracker/utils/custom_textfield.dart';
 import 'package:expense_tracker/views/category/add_category/controller/add_category_controller.dart';
 import 'package:flutter/material.dart';
@@ -116,7 +117,14 @@ class AddCategoryView extends GetView<AddCategoryController> {
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return buildPickIconDialog();
+                },
+              );
+            },
             child: Container(
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.only(left: AppSizes.p24 * 2),
@@ -124,11 +132,7 @@ class AddCategoryView extends GetView<AddCategoryController> {
               width: Get.width,
               height: AppSizes.p24 * 2,
               decoration: BoxDecoration(
-                border: Border.all(
-                  style: BorderStyle.solid,
-                  width: .5,
-                  // color: ColorConstants.kWhiteColor,
-                ),
+                border: Border.all(),
                 borderRadius: BorderRadius.circular(AppSizes.m8),
               ),
               child: const Icon(Icons.category_rounded),
@@ -170,6 +174,17 @@ class AddCategoryView extends GetView<AddCategoryController> {
               ),
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  buildPickIconDialog() {
+    return CustomDialog(
+      title: 'pick an icon',
+      children: Wrap(
+        children: [
+          for (int i = 0; i < 100; i++) const Icon(Icons.category_rounded),
         ],
       ),
     );
