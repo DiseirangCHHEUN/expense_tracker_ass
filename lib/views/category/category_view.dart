@@ -79,7 +79,7 @@ class CategoryView extends GetView<CategoryController> {
                 itemCount: 15,
                 itemBuilder: (context, index) => ListTile(
                   leading: const Icon(Icons.abc),
-                  title: Text('income'.tr),
+                  title: Text('expense'.tr),
                   trailing: const Text(
                     'Default',
                     style: TextStyle(fontSize: AppSizes.s14),
