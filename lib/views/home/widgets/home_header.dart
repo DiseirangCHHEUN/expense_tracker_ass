@@ -36,7 +36,7 @@ GetBuilder<HomeController> buildHomeHeader({required int index}) {
                   builder: (controller) {
                     return Text(
                       '${controller.pageItem[index]}/2024',
-                      style: TextStyleConstant.kTitleSmallTextStyle,
+                      style: TextStyleConstant.kSmallTitleTextStyle,
                     );
                   }),
             ),

@@ -8,9 +8,9 @@ class TextStyleConstant {
     fontWeight: FontWeight.bold,
     fontSize: AppSizes.s24,
   );
-  static const TextStyle kTitleSmallTextStyle = TextStyle(
+  static const TextStyle kSmallTitleTextStyle = TextStyle(
     fontWeight: FontWeight.bold,
-    color: ColorConstants.kWhiteColor,
+    fontSize: AppSizes.s20,
   );
 
   static const TextStyle kSubTitleTextStyle = TextStyle(

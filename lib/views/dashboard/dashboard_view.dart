@@ -36,7 +36,6 @@ class DashboardView extends GetView<DashboardController> {
         items: [
           CurvedNavigationBarItem(
             icon: const Icon(Icons.home_rounded),
-          
             label: 'home'.tr,
           ),
           CurvedNavigationBarItem(
@@ -78,7 +77,7 @@ class DashboardView extends GetView<DashboardController> {
                               requestFocusOnTap: true,
                               label: Text(
                                 'type'.tr,
-                                style: TextStyleConstant.kTitleSmallTextStyle,
+                                style: TextStyleConstant.kSmallTitleTextStyle,
                               ),
                               onSelected: (ExpensionType? type) {
                                 dashboardController.onSelectColor(type);
@@ -98,7 +97,7 @@ class DashboardView extends GetView<DashboardController> {
                               }).toList(),
                             ),
                             TextField(
-                              style: TextStyleConstant.kTitleSmallTextStyle,
+                              style: TextStyleConstant.kSmallTitleTextStyle,
                               keyboardType: TextInputType.number,
                               controller: controller.textController,
                               decoration: InputDecoration(
@@ -139,7 +138,7 @@ class DashboardView extends GetView<DashboardController> {
                                     child: Text(
                                       'add'.tr,
                                       style: TextStyleConstant
-                                          .kTitleSmallTextStyle,
+                                          .kSmallTitleTextStyle,
                                     ),
                                   ),
                                 ),
@@ -155,7 +154,7 @@ class DashboardView extends GetView<DashboardController> {
                                     child: Text(
                                       'close'.tr,
                                       style: TextStyleConstant
-                                          .kTitleSmallTextStyle,
+                                          .kSmallTitleTextStyle,
                                     ),
                                   ),
                                 ),
