@@ -70,7 +70,7 @@ class SectionHeader extends StatelessWidget {
               ),
               child: Text(
                 'today'.tr,
-                style: TextStyleConstant.kTitleSmallTextStyle,
+                style: TextStyleConstant.kSmallTitleTextStyle,
               ),
             ),
             Center(
@@ -113,7 +113,7 @@ class SectionHeader extends StatelessWidget {
                   ),
                   Text(
                     '${controller.pageItem[index]} USD',
-                    style: TextStyleConstant.kTitleSmallTextStyle,
+                    style: TextStyleConstant.kSmallTitleTextStyle,
                   ),
                 ],
               ),

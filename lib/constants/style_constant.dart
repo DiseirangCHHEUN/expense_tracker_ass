@@ -8,12 +8,14 @@ class TextStyleConstant {
     fontWeight: FontWeight.bold,
     fontSize: AppSizes.s24,
   );
-  static const TextStyle kTitleSmallTextStyle = TextStyle(
+  static const TextStyle kSmallTitleTextStyle = TextStyle(
     fontWeight: FontWeight.bold,
+ 
   );
   static const TextStyle kButtonTextStyle = TextStyle(
     fontWeight: FontWeight.bold,
     color: ColorConstants.kWhiteColor,
+ 
   );
   static const TextStyle kSubTitleTextStyle = TextStyle(
     color: ColorConstants.kWhiteColor,

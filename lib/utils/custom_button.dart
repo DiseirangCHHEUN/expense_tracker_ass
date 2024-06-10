@@ -32,7 +32,9 @@ class CustomButton extends StatelessWidget {
           children: [
             Text(
               buttonText,
+ 
               style: TextStyleConstant.kButtonTextStyle,
+ 
             ),
             const SizedBox(width: AppSizes.p10),
             Icon(
