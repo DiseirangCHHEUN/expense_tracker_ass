@@ -19,9 +19,10 @@ class SettingView extends GetView<SettingController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(
-          title: 'setting',
-          leading: const SizedBox(),
-          actions: const SizedBox()),
+        title: 'setting',
+        leading: const SizedBox(),
+        actions: const SizedBox(),
+      ),
       body: ListView(
         padding: const EdgeInsets.symmetric(
             horizontal: AppSizes.p8, vertical: AppSizes.p18),

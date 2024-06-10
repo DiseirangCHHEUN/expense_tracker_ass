@@ -26,7 +26,6 @@ class SettingListTile extends StatelessWidget {
           title: Text(
             title.tr,
             textAlign: TextAlign.left,
-            // style: TextStyleConstant.kTitleSmallTextStyle,
           ),
           subtitle: Text(
             subtitle.tr,
