@@ -91,7 +91,7 @@ class SignupView extends StatelessWidget {
                 suffixIcon: const SizedBox(),
               ),
               buildSignUpTextField(
-                hint: 'confirm password',
+                hint: 'Confirm password',
                 obscure: true,
                 controller: _authController.cPwdSignupController,
                 keyboardType: TextInputType.visiblePassword,

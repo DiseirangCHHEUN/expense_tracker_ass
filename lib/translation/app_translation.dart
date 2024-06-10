@@ -64,8 +64,10 @@ class AppTranslation extends Translations {
           'export data': 'Export data',
           'export data to excel': 'Export data to Excel',
           'pick an icon': 'Pick an icon',
+          'click here to choose your icon': 'Click here to choose your icon',
         },
         'km_KH': {
+          'click here to choose your icon': 'ចុចទីនេះដើម្បីជ្រើសរើសរូបដំណាង',
           'pick an icon': 'ជ្រើសរូបដំណាង',
           'export data to excel': 'ចម្លងទិន្នន័យចេញជា Excel',
           'export data': 'ចម្លងទិន្នន័យចេញ',
