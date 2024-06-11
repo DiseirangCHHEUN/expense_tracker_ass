@@ -1,3 +1,4 @@
+import 'package:expense_tracker/views/setting/controller/setting_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,11 +28,19 @@ class SettingListTile extends StatelessWidget {
             title.tr,
             textAlign: TextAlign.left,
           ),
-          subtitle: Text(
-            subtitle.tr,
-            style: TextStyle(
-              color: title == 'profile' ? null : ColorConstants.kYellowColor,
-            ),
+          subtitle: GetBuilder<SettingController>(
+            builder: (controller) {
+              return Text(
+                subtitle.tr,
+                style: TextStyle(
+                  color: title == 'profile'
+                      ? null
+                      : controller.isDarkMode
+                          ? ColorConstants.kYellowColor
+                          : ColorConstants.kRedColor,
+                ),
+              );
+            }
           ),
           trailing: trailing,
         ),

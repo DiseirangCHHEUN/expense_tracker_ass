@@ -11,10 +11,7 @@ import 'data/constant_list.dart';
 
 class AddCategoryView extends GetView<AddCategoryController> {
   AddCategoryView({super.key});
-  final TextEditingController categoryNameController = TextEditingController();
 
-  final TextEditingController categoryKhNameController =
-      TextEditingController();
   final AddCategoryController _addCateController =
       Get.put(AddCategoryController());
 
@@ -41,7 +38,7 @@ class AddCategoryView extends GetView<AddCategoryController> {
           ),
           buildTextField(
             obscure: false,
-            controller: categoryNameController,
+            controller: _addCateController.enNameController,
             suffixIcon: const SizedBox(),
             keyboardType: TextInputType.text,
             hint: '',
@@ -53,7 +50,7 @@ class AddCategoryView extends GetView<AddCategoryController> {
           ),
           buildTextField(
             obscure: false,
-            controller: categoryKhNameController,
+            controller: _addCateController.khNameController,
             suffixIcon: const SizedBox(),
             keyboardType: TextInputType.text,
             hint: 'Category Name in Khmer',
@@ -199,6 +196,7 @@ class AddCategoryView extends GetView<AddCategoryController> {
             ),
             onPressed: () {
               // save function
+              _addCateController.insertCategory();
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
