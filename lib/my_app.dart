@@ -29,9 +29,7 @@ class MyApp extends StatelessWidget {
           initialBinding: DashboardBinding(),
           home: LoginView(),
           translations: AppTranslation(),
-          locale: _settingController.isEnglish
-              ? const Locale('km', 'KH')
-              : const Locale('en', 'US'),
+          locale: Get.deviceLocale,
           fallbackLocale: const Locale('en', 'US'),
         );
       },

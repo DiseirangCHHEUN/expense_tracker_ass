@@ -1,9 +1,10 @@
 import 'package:expense_tracker/constants/app_size.dart';
 import 'package:expense_tracker/constants/color_constant.dart';
+import 'package:expense_tracker/constants/style_constant.dart';
 import 'package:expense_tracker/utils/custom_appbar.dart';
-import 'package:expense_tracker/utils/custom_dialog.dart';
 import 'package:expense_tracker/utils/custom_textfield.dart';
 import 'package:expense_tracker/views/category/add_category/controller/add_category_controller.dart';
+import 'package:expense_tracker/views/setting/controller/setting_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'data/constant_list.dart';
@@ -94,12 +95,13 @@ class AddCategoryView extends GetView<AddCategoryController> {
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: AppSizes.s12,
+                                  color: Colors.white,
                                 ),
                               ),
                               const SizedBox(width: AppSizes.p10),
                               Icon(
                                 cateType[i]['icon'],
-                                color: Colors.black,
+                                // color: Colors.black,
                                 size: 17,
                               )
                             ],
@@ -118,24 +120,40 @@ class AddCategoryView extends GetView<AddCategoryController> {
           ),
           GestureDetector(
             onTap: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return buildPickIconDialog();
-                },
-              );
+              _addCateController.pickIcon(context);
             },
-            child: Container(
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.only(left: AppSizes.p24 * 2),
-              margin: const EdgeInsets.symmetric(vertical: AppSizes.p10),
-              width: Get.width,
-              height: AppSizes.p24 * 2,
-              decoration: BoxDecoration(
-                border: Border.all(),
-                borderRadius: BorderRadius.circular(AppSizes.m8),
-              ),
-              child: const Icon(Icons.category_rounded),
+            child: GetBuilder<AddCategoryController>(
+              builder: (context) {
+                return GetBuilder<SettingController>(
+                  builder: (controller) {
+                    return Container(
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.only(left: AppSizes.p10),
+                      margin:
+                          const EdgeInsets.symmetric(vertical: AppSizes.p10),
+                      width: Get.width,
+                      height: AppSizes.p24 * 2,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: controller.isDarkMode
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                        borderRadius: BorderRadius.circular(AppSizes.m8),
+                      ),
+                      child: Row(
+                        children: [
+                          Text('click here to choose your icon'.tr),
+                          const SizedBox(width: AppSizes.p10),
+                          _addCateController.icon != null
+                              ? _addCateController.icon!
+                              : const Icon(Icons.category_rounded),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
             ),
           ),
           const SizedBox(height: AppSizes.p16),
@@ -174,17 +192,29 @@ class AddCategoryView extends GetView<AddCategoryController> {
               ),
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  buildPickIconDialog() {
-    return CustomDialog(
-      title: 'pick an icon',
-      children: Wrap(
-        children: [
-          for (int i = 0; i < 100; i++) const Icon(Icons.category_rounded),
+          const SizedBox(height: AppSizes.s10),
+          FilledButton(
+            style: const ButtonStyle(
+              backgroundColor: WidgetStatePropertyAll(ColorConstants.kRedColor),
+            ),
+            onPressed: () {
+              // save function
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'save'.tr,
+                  style: TextStyleConstant.kButtonTextStyle,
+                ),
+                const SizedBox(width: AppSizes.s10),
+                const Icon(
+                  Icons.save_rounded,
+                  color: ColorConstants.kBGColor,
+                )
+              ],
+            ),
+          ),
         ],
       ),
     );

@@ -1,4 +1,6 @@
 import 'package:expense_tracker/views/category/add_category/data/constant_list.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 import 'package:get/get.dart';
 
 class AddCategoryController extends GetxController {
@@ -19,5 +21,22 @@ class AddCategoryController extends GetxController {
     currentColorIndex = i;
     isColorSelected = true;
     update();
+  }
+
+  Icon? icon;
+
+  pickIcon(BuildContext context) async {
+    IconData? iconData = await showIconPicker(
+      context,
+      iconSize: 30,
+      title: Text('pick an icon'.tr),
+      closeChild: Text('close'.tr),
+      searchHintText: 'search'.tr,
+      iconPackModes: [IconPack.cupertino],
+    );
+
+    icon = Icon(iconData);
+    update();
+    debugPrint('Picked Icon:  $iconData');
   }
 }
