@@ -9,7 +9,7 @@ import '../../../utils/custom_button.dart';
 import '../controller/auth_controller.dart';
 import 'widgets/signup_textfield.dart';
 
-class SignupView extends StatelessWidget {
+class SignupView extends GetView<AuthController> {
   SignupView({super.key});
   final AuthController _authController = Get.put(AuthController());
 

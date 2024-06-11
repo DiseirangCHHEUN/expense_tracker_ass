@@ -3,6 +3,7 @@ import 'package:expense_tracker/views/category/add_category/add_category.dart';
 import 'package:expense_tracker/views/category/controller/category_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../utils/custom_appbar.dart';
 import '../../utils/custom_textfield.dart';
@@ -19,11 +20,15 @@ class CategoryView extends GetView<CategoryController> {
         actions: IconButton(
           icon: const Icon(Icons.add),
           onPressed: () {
-            Get.to(
-              () => AddCategoryView(),
-              transition: Transition.rightToLeft,
-              duration: const Duration(milliseconds: 300),
+            showCupertinoModalBottomSheet(
+              context: context,
+              builder: (context) => AddCategoryView(),
             );
+            // Get.to(
+            //   () => AddCategoryView(),
+            //   transition: Transition.rightToLeft,
+            //   duration: const Duration(milliseconds: 300),
+            // );
           },
         ),
       ),

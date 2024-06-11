@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -20,7 +18,7 @@ class SettingController extends GetxController {
       local = const Locale('en', 'US');
       isEnglish = !isEnglish;
       await Get.updateLocale(local);
-      updateEnglishLang();
+      updateLocalization();
       return;
     }
 
@@ -28,7 +26,7 @@ class SettingController extends GetxController {
       local = const Locale('km', 'KH');
       isEnglish = !isEnglish;
       await Get.updateLocale(local);
-      updateEnglishLang();
+      updateLocalization();
       return;
     }
   }
@@ -37,32 +35,30 @@ class SettingController extends GetxController {
     if (isEnglish) {
       local = const Locale('en', 'US');
       await Get.updateLocale(local);
-      updateEnglishLang();
-      return;
+      changeToEnglish();
     } else {
       local = const Locale('km', 'KH');
       await Get.updateLocale(local);
-      updateEnglishLang();
-      return;
+      changeToKhmer();
     }
   }
 
-  void changeToEngLang() async {
-    isEnglish = false;
+  void changeToEnglish() async {
+    isEnglish = true;
     local = const Locale('en', 'US');
     await Get.updateLocale(local);
-    updateEnglishLang();
+    updateLocalization();
     Get.back();
-    return;
+    update();
   }
 
-  void changeToKhmerLang() async {
-    isEnglish = true;
+  void changeToKhmer() async {
+    isEnglish = false;
     local = const Locale('km', 'KH');
     await Get.updateLocale(local);
-    updateEnglishLang();
+    updateLocalization();
     Get.back();
-    return;
+    update();
   }
 
   void toDark() {
@@ -82,8 +78,8 @@ class SettingController extends GetxController {
   final settingBox = Hive.box('settings');
 
   void loadSettingsData() async {
-    if (settingBox.get('ENGLISH') != null) {
-      isEnglish = await settingBox.get('ENGLISH');
+    if (settingBox.get('LOCALIZATION') != null) {
+      isEnglish = await settingBox.get('LOCALIZATION');
       changeLanguage();
       update();
     }
@@ -94,13 +90,12 @@ class SettingController extends GetxController {
     }
     if (settingBox.get('THEMEMODE') != null) {
       isDarkMode = await settingBox.get('THEMEMODE');
-      print(isDarkMode);
       update();
     }
   }
 
-  void updateEnglishLang() {
-    settingBox.put('ENGLISH', isEnglish);
+  void updateLocalization() {
+    settingBox.put('LOCALIZATION', isEnglish);
   }
 
   void updateNotification() {

@@ -1,5 +1,6 @@
 import 'package:expense_tracker/constants/app_size.dart';
 import 'package:expense_tracker/constants/color_constant.dart';
+import 'package:expense_tracker/constants/style_constant.dart';
 import 'package:expense_tracker/utils/custom_appbar.dart';
 import 'package:expense_tracker/utils/custom_textfield.dart';
 import 'package:expense_tracker/views/category/add_category/controller/add_category_controller.dart';
@@ -100,7 +101,7 @@ class AddCategoryView extends GetView<AddCategoryController> {
                               const SizedBox(width: AppSizes.p10),
                               Icon(
                                 cateType[i]['icon'],
-                                color: Colors.black,
+                                // color: Colors.black,
                                 size: 17,
                               )
                             ],
@@ -189,6 +190,29 @@ class AddCategoryView extends GetView<AddCategoryController> {
                   },
                 ),
               ),
+            ),
+          ),
+          const SizedBox(height: AppSizes.s10),
+          FilledButton(
+            style: const ButtonStyle(
+              backgroundColor: WidgetStatePropertyAll(ColorConstants.kRedColor),
+            ),
+            onPressed: () {
+              // save function
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'save'.tr,
+                  style: TextStyleConstant.kButtonTextStyle,
+                ),
+                const SizedBox(width: AppSizes.s10),
+                const Icon(
+                  Icons.save_rounded,
+                  color: ColorConstants.kBGColor,
+                )
+              ],
             ),
           ),
         ],
