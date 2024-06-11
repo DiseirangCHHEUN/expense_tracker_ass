@@ -48,7 +48,7 @@ class DashboardView extends GetView<DashboardController> {
               ),
               CurvedNavigationBarItem(
                 icon: const Icon(Icons.bar_chart_rounded),
-                label: 'states'.tr,
+                label: 'report'.tr,
               ),
               CurvedNavigationBarItem(
                 icon: const Icon(Icons.settings_rounded),

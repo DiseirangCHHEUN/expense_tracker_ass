@@ -14,6 +14,8 @@ Column buildTextField({
       children: [
         const SizedBox(height: AppSizes.p10),
         TextField(
+          onSubmitted: (value) {},
+          controller: controller,
           obscureText: obscure,
           keyboardType: keyboardType,
           decoration: InputDecoration(
