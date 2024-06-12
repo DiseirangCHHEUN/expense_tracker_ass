@@ -17,8 +17,8 @@ class SettingView extends GetView<SettingController> {
   final SettingController settingController = Get.put(SettingController());
   @override
   Widget build(BuildContext context) {
-    var isDark = settingController.isDarkMode;
     return GetBuilder<SettingController>(builder: (context) {
+      var isDark = settingController.isDarkMode;
       return Scaffold(
         appBar: buildAppBar(
           title: 'setting',
