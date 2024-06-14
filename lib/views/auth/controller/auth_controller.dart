@@ -82,6 +82,34 @@ class AuthController extends GetxController {
     pwdSignupController.clear();
     cPwdSignupController.clear();
   }
+
+  // controller for reset password
+
+  final frmKey = GlobalKey<FormState>();
+  TextEditingController textEditingController = TextEditingController();
+  String email = '';
+  bool isVisible = false;
+  int? countDownNumber;
+  Future<void> startPwdResetCountDown() async {
+    if (countDownNumber == 0) {
+      email = textEditingController.text;
+      update();
+      if (frmKey.currentState!.validate()) {
+        for (int i = 59; i >= 0; i--) {
+          textEditingController.clear();
+          isVisible = true;
+          await Future.delayed(
+            const Duration(seconds: 1),
+          );
+          countDownNumber = i;
+          update();
+        }
+        isVisible = false;
+        email = '';
+        update();
+      }
+    }
+  }
 }
 
 class CropAspectRatioPresetCustom implements CropAspectRatioPresetData {
