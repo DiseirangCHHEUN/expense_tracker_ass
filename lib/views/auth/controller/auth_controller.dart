@@ -1,39 +1,154 @@
-// ignore_for_file: avoid_print
 import 'dart:io';
+
+import 'package:expense_tracker/views/auth/login/login_view.dart';
+import 'package:expense_tracker/views/dashboard/dashboard_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AuthController extends GetxController {
-  // text editing controller for login page
-  final TextEditingController emailLoginController = TextEditingController();
-  final TextEditingController pwdLoginController = TextEditingController();
-
-  // text editing controller for signup page
-  final TextEditingController usernameSignupController =
-      TextEditingController();
-  final TextEditingController emailSignupController = TextEditingController();
-  final TextEditingController phoneSignupController = TextEditingController();
-  final TextEditingController pwdSignupController = TextEditingController();
-  final TextEditingController cPwdSignupController = TextEditingController();
-
-  bool isPwdVisibility = true;
-  void toggleShowPwd() {
-    isPwdVisibility = !isPwdVisibility;
-    print(isPwdVisibility);
-    update();
-  }
-
-  // For pick image or take a photo for profile
+  static AuthController instance = Get.find();
+  late Rx<User?> _user;
+  FirebaseAuth auth = FirebaseAuth.instance;
   File? imageFile;
   final ImagePicker _picker = ImagePicker();
+  var email = ''.obs;
+  var password = ''.obs;
+  var currentPassword = ''.obs;
+  var confirmPassword = ''.obs;
+  var phoneNumber = ''.obs;
+  var isPwdVisibility = true.obs;
+
+  @override
+  void onReady() {
+    super.onReady();
+    _user = Rx<User?>(auth.currentUser);
+    _user.bindStream(auth.userChanges());
+    ever(_user, _initialScreen);
+  }
+
+  _initialScreen(User? user) {
+    if (user == null) {
+      // User is not logged in
+      clearData();
+      Get.offAll(() => LoginPage());
+    } else {
+      // User is logged in
+      Get.offAll(() => DashboardView());
+    }
+  }
+
+  void clearData() {
+    email.value = '';
+    password.value = '';
+    currentPassword.value = '';
+    confirmPassword.value = '';
+    phoneNumber.value = '';
+    imageFile = null; // Reset imageFile as well
+    update(); // Notify listeners about data changes
+  }
+
+  void register(String email, String password, String currentPassword,
+      String phoneNumber) async {
+    if (password != currentPassword) {
+      Get.snackbar(
+        "Error",
+        "Passwords do not match",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
+
+    try {
+      await auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      // After successful registration, clear data and navigate to login page
+      clearData();
+      Get.offAll(() => LoginPage());
+    } catch (e) {
+      Get.snackbar(
+        "Error creating account",
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+  }
+
+  void login(String email, String password) async {
+    try {
+      await auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      // After successful login, clear data and navigate to home page
+      clearData();
+      Get.offAll(() => DashboardView());
+    } catch (e) {
+      Get.snackbar(
+        "Error logging in",
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+  }
+
+  void resetPassword(String email) async {
+    try {
+      await auth.sendPasswordResetEmail(email: email);
+      Get.snackbar(
+        "Password Reset",
+        "Password reset email has been sent to $email",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    } catch (e) {
+      Get.snackbar(
+        "Error resetting password",
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+  }
+
+  void resetPasswordByPhoneNumber(String phoneNumber) async {
+    try {
+      // Implement your custom logic to reset password via phone number
+      await Future.delayed(Duration(seconds: 2)); // Simulating a delay
+
+      Get.snackbar(
+        "Reset Password",
+        "Password reset via phone number is not supported in this demo.",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    } catch (e) {
+      Get.snackbar(
+        "Error resetting password",
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+  }
+
+  void signOut() async {
+    await auth.signOut();
+    // Clear data upon sign out
+    clearData();
+    // Navigate back to login page
+    Get.offAll(() => LoginPage());
+  }
+
+  void toggleShowPwd() {
+    isPwdVisibility.value = !isPwdVisibility.value;
+  }
+
   Future<void> pickGalleryImage() async {
-    // pick an image to crop
     final pickedImage = await _picker.pickImage(source: ImageSource.gallery);
 
     if (pickedImage != null) {
-      // crop image for profile
       CroppedFile? croppedFiled = await ImageCropper().cropImage(
         sourcePath: pickedImage.path,
         compressFormat: ImageCompressFormat.png,
@@ -46,19 +161,13 @@ class AuthController extends GetxController {
             initAspectRatio: CropAspectRatioPreset.square,
             lockAspectRatio: false,
             aspectRatioPresets: [
-              // CropAspectRatioPreset.original,
               CropAspectRatioPreset.square,
-              // CropAspectRatioPreset.ratio4x3,
-              // CropAspectRatioPresetCustom(),
             ],
           ),
           IOSUiSettings(
             title: 'Cropper',
             aspectRatioPresets: [
-              // CropAspectRatioPreset.original,
-              // CropAspectRatioPreset.square,
               CropAspectRatioPreset.ratio4x3,
-              // CropAspectRatioPresetCustom(),
             ],
           ),
         ],
@@ -69,25 +178,4 @@ class AuthController extends GetxController {
       }
     }
   }
-
-  void clearLoginData() {
-    emailLoginController.clear();
-    pwdLoginController.clear();
-  }
-
-  void clearSignupData() {
-    usernameSignupController.clear();
-    emailSignupController.clear();
-    phoneSignupController.clear();
-    pwdSignupController.clear();
-    cPwdSignupController.clear();
-  }
-}
-
-class CropAspectRatioPresetCustom implements CropAspectRatioPresetData {
-  @override
-  (int, int)? get data => (2, 3);
-
-  @override
-  String get name => '2x3 (customized)';
 }

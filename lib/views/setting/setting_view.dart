@@ -8,6 +8,7 @@ import 'package:expense_tracker/views/wallet/wallet_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
+
 import '../../utils/custom_dialog.dart';
 import 'widgets/setting_listtile.dart';
 
@@ -36,12 +37,10 @@ class SettingView extends GetView<SettingController> {
               onTap: () {},
               leading: GetBuilder<AuthController>(
                 builder: (controller) {
-                  return CircleAvatar(
-                    maxRadius: AppSizes.s18,
-                    backgroundImage: controller.imageFile == null
-                        ? null
-                        : FileImage(controller.imageFile!),
-                  );
+                  return const CircleAvatar(
+                      maxRadius: AppSizes.s18,
+                      backgroundImage: NetworkImage(
+                          "https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"));
                 },
               ),
               subtitle: 'view your profile',
@@ -147,6 +146,12 @@ class SettingView extends GetView<SettingController> {
                 color: ColorConstants.kRedColor,
               ),
               subtitle: 'deletealldata',
+            ),
+            IconButton(
+              icon: Icon(Icons.logout),
+              onPressed: () {
+                authController.signOut();
+              },
             ),
           ],
         ),

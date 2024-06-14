@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           initialBinding: DashboardBinding(),
-          home: LoginView(),
+          home: LoginPage(),
           translations: AppTranslation(),
           locale: Get.deviceLocale,
           fallbackLocale: const Locale('en', 'US'),
