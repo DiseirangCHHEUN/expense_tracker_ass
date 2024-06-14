@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import '../../utils/custom_dialog.dart';
+import '../profile/profile_view.dart';
 import 'widgets/setting_listtile.dart';
 
 class SettingView extends GetView<SettingController> {
@@ -33,7 +34,13 @@ class SettingView extends GetView<SettingController> {
             SettingListTile(
               title: 'profile',
               trailing: const Icon(Icons.arrow_forward_ios_rounded),
-              onTap: () {},
+              onTap: () {
+                Get.to(
+                  () => const ProfileView(),
+                  transition: Transition.topLevel,
+                  duration: const Duration(milliseconds: 300),
+                );
+              },
               leading: GetBuilder<AuthController>(
                 builder: (controller) {
                   return CircleAvatar(

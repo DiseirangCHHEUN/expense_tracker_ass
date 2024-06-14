@@ -1,5 +1,6 @@
 import 'package:expense_tracker/constants/app_size.dart';
 import 'package:expense_tracker/constants/color_constant.dart';
+import 'package:expense_tracker/views/auth/login/forgot_pwd_view.dart';
 import 'package:expense_tracker/views/auth/signup/signup_view.dart';
 import 'package:expense_tracker/views/auth/controller/auth_controller.dart';
 import 'package:expense_tracker/utils/custom_button.dart';
@@ -67,10 +68,19 @@ class LoginView extends GetView<AuthController> {
                   },
                 ),
                 const SizedBox(height: AppSizes.p10),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text('Forgot Password?'),
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(
+                          () => ForgotPwdView(),
+                          transition: Transition.rightToLeft,
+                          duration: const Duration(milliseconds: 300),
+                        );
+                      },
+                      child: const Text('Forgot Password?'),
+                    ),
                   ],
                 ),
                 CustomButton(
@@ -86,36 +96,47 @@ class LoginView extends GetView<AuthController> {
                   icon: Icons.login_rounded,
                 ),
                 const SizedBox(height: AppSizes.p20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Wrap(
-                      children: [
-                        const Text("Don't have an account?"),
-                        const SizedBox(width: AppSizes.p8),
-                        GestureDetector(
-                          onTap: () => Get.off(
-                            () => SignupView(),
-                            transition: Transition.fade,
-                            duration: const Duration(milliseconds: 300),
-                          ),
-                          child: Text(
-                            "Register",
-                            style: TextStyle(
-                              color: ColorConstants.kRedColor.withOpacity(.8),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                const RegisterAccount(),
                 const SizedBox(height: AppSizes.s28),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class RegisterAccount extends StatelessWidget {
+  const RegisterAccount({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Wrap(
+          children: [
+            const Text("Don't have an account?"),
+            const SizedBox(width: AppSizes.p8),
+            GestureDetector(
+              onTap: () => Get.off(
+                () => SignupView(),
+                transition: Transition.fade,
+                duration: const Duration(milliseconds: 300),
+              ),
+              child: Text(
+                "Register",
+                style: TextStyle(
+                  color: ColorConstants.kRedColor.withOpacity(.8),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
