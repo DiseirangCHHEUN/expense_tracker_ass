@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 
 import 'views/auth/login/login_view.dart';
 
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
+class MyApptwo extends StatelessWidget {
+  MyApptwo({super.key});
 
   // This widget is the root of your application.
   final _settingController = Get.put(SettingController());

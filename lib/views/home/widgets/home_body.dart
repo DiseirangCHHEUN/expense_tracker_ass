@@ -2,6 +2,7 @@ import 'package:expense_tracker/constants/app_size.dart';
 import 'package:expense_tracker/constants/color_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../constants/style_constant.dart';
 import '../controller/home_controller.dart';
 import 'home_header.dart';
@@ -42,7 +43,7 @@ GetBuilder<HomeController> buildHomeBody() {
   );
 }
 
-class SectionHeader extends StatelessWidget {
+class SectionHeader extends StatefulWidget {
   const SectionHeader({
     super.key,
     required this.controller,
@@ -52,6 +53,11 @@ class SectionHeader extends StatelessWidget {
   final HomeController controller;
   final int index;
 
+  @override
+  State<SectionHeader> createState() => _SectionHeaderState();
+}
+
+class _SectionHeaderState extends State<SectionHeader> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -75,7 +81,7 @@ class SectionHeader extends StatelessWidget {
             ),
             Center(
               child: Text(
-                '\$${controller.pageItem[index]}',
+                '\$${widget.controller.pageItem[widget.index]}',
                 style: const TextStyle(
                   color: ColorConstants.kBlueColor,
                   fontSize: AppSizes.s20,
@@ -107,12 +113,12 @@ class SectionHeader extends StatelessWidget {
                     child: Row(
                       children: [
                         const Icon(Icons.abc),
-                        Text('${controller.pageItem[controller.currentIndex]}')
+                        // Text('${controller.pageItem[controller.currentIndex]}')
                       ],
                     ),
                   ),
                   Text(
-                    '${controller.pageItem[index]} USD',
+                    '${widget.controller.pageItem[index]} USD',
                     style: TextStyleConstant.kSmallTitleTextStyle,
                   ),
                 ],

@@ -15,12 +15,12 @@ GetBuilder<HomeController> buildHomeHeader({required int index}) {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            BackButton(
-              onPressed: () => controller.goPreviouse(),
-              color: controller.currentIndex == 0
-                  ? ColorConstants.kGreyColor
-                  : null,
-            ),
+            // BackButton(
+            //   onPressed: () => controller.goPreviouse(),
+            //   color: controller.currentIndex == 0
+            //       ? ColorConstants.kGreyColor
+            //       : null,
+            // ),
             Container(
               padding: const EdgeInsets.symmetric(
                   horizontal: AppSizes.p10, vertical: AppSizes.p5),
@@ -40,15 +40,15 @@ GetBuilder<HomeController> buildHomeHeader({required int index}) {
                     );
                   }),
             ),
-            IconButton(
-              onPressed: () => controller.goNext(),
-              icon: Icon(
-                Icons.arrow_forward_rounded,
-                color: controller.currentIndex == controller.pageItem.length - 1
-                    ? ColorConstants.kGreyColor
-                    : null,
-              ),
-            ),
+            // IconButton(
+            //   onPressed: () => controller.goNext(),
+            //   icon: Icon(
+            //     Icons.arrow_forward_rounded,
+            //     color: controller.currentIndex == controller.pageItem.length - 1
+            //         ? ColorConstants.kGreyColor
+            //         : null,
+            //   ),
+            // ),
           ],
         ),
       );

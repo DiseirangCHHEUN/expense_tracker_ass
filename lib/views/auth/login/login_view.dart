@@ -21,7 +21,7 @@ class LoginPage extends StatelessWidget {
             children: [
               const SizedBox(height: 160),
               Image.asset(
-                'assets/logo.png',
+                'assets/logo.png', // Ensure this asset exists and is correctly referenced
                 height: 120,
                 width: 120,
               ),
@@ -117,7 +117,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),
